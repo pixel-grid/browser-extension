@@ -1,0 +1,43 @@
+.presets-page {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &__toolbar {
+        margin: 0;
+        padding: 24px 24px 12px;
+        background-color: map(colors, bluegrey, 50);
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__list {
+        margin: 0;
+        padding: 24px;
+        flex-grow: 1;
+        background-color: map(colors, bluegrey, 50);
+        overflow-y: auto;
+    }
+
+    &__bottom {
+        margin: 0;
+        padding: 24px;
+        background-color: map(colors, bluegrey, 50);
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__bottom-help {
+        margin: 0;
+        padding: 14px 0 0;
+        flex-grow: 1;
+        font-family: map(fonts, primary);
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 10px;
+        color: map(colors, bluegrey, 400);
+        user-select: none;
+    }
+}

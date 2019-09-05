@@ -1,0 +1,141 @@
+.edit-grid-page {
+    background-color: map(colors, bluegrey, 50);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &__form {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        height: calc(100% - 56px);
+    }
+
+    &__inputs {
+        padding: 24px 0 16px;
+        margin: 0 24px;
+        flex-grow: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: auto auto auto auto auto;
+        grid-column-gap: 16px;
+        min-height: 360px;
+        align-content: start;
+    }
+
+    &__input-layout {
+        margin: 16px 0 0;
+        grid-column: 1 / span 3;
+        grid-row: 1;
+    }
+
+    &__input-size {
+        margin: 16px 0 0;
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    &__input-count {
+        margin: 16px 0 0;
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    &__input-color {
+        margin: 16px 0 0;
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    &__input-colora {
+        margin: 16px 0 0;
+        grid-column: 3;
+        grid-row: 2;
+    }
+
+    &__input-type {
+        margin: 16px 0 0;
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    &__input-width {
+        margin: 16px 0 0;
+        grid-column: 2;
+        grid-row: 3;
+    }
+
+    &__input-height {
+        margin: 16px 0 0;
+        grid-column: 2;
+        grid-row: 3;
+    }
+
+    &__input-offset {
+        margin: 16px 0 0;
+        grid-column: 3;
+        grid-row: 3;
+    }
+    &__input-margin {
+        margin: 16px 0 0;
+        grid-column: 3;
+        grid-row: 3;
+    }
+
+    &__input-gutter {
+        margin: 16px 0 0;
+        grid-column: 1;
+        grid-row: 4;
+    }
+
+    &__input-mediaquery {
+        margin: 16px 0 0;
+        grid-column: 1 / span 3;
+        grid-row: 5;
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__input-mediaquery-type {
+        width: 200px;
+    }
+
+    &__input-mediaquery-value {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: row;
+
+        > * {
+            margin: 0 0 0 16px;
+            flex-grow: 1;
+        }
+    }
+
+    &__bottom {
+        margin: 0;
+        padding: 24px;
+        display: flex;
+        flex-direction: row;
+
+        &__left {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+        }
+
+        &__right {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 1;
+            justify-content: flex-end;
+
+            > * {
+                margin-right: 16px !important;
+
+                &:last-child {
+                    margin-right: 0 !important;
+                }
+            }
+        }
+    }
+}

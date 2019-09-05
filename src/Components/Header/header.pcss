@@ -1,0 +1,62 @@
+.header {
+    background-color: map(colors, bluegrey, 700);
+    height: 56px;
+    min-height: 56px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+
+    &__logo {
+        margin: 0;
+        padding: 0;
+        width: 64px;
+        user-select: none;
+    }
+
+    &__logo-image {
+        margin: 16px 0 0 24px;
+    }
+
+    &__button {
+        margin: 0;
+        padding: 0;
+        width: 64px;
+        user-select: none;
+        outline: none;
+    }
+
+    &__button-link {
+        margin: 0;
+        padding: 16px 24px;
+        display: block;
+        user-select: none;
+        outline: none;
+    }
+
+    &__title {
+        margin: 0;
+        padding: 0;
+        flex-grow: 1;
+        align-self: center;
+        font-family: map(fonts, primary);
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 16px;
+        color: map(colors, bluegrey, 50);
+        user-select: none;
+        cursor: default;
+    }
+
+    &__github {
+        margin: 0;
+        padding: 0;
+        opacity: 0.7;
+        width: 64px;
+        user-select: none;
+
+        &:hover, &:active {
+            opacity: 1;
+        }
+    }
+}

@@ -1,0 +1,61 @@
+.list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+
+    &__button {
+        margin: 0 0 16px;
+        padding: 14px 16px 15px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        text-align: left;
+        border: none;
+        border-radius: 4px;
+        background-color: map(colors, bluegrey, 100);
+        user-select: none;
+        outline: none;
+        cursor: pointer;
+        transition: background .15s;
+
+        &:hover {
+            background-color: map(colors, bluegrey, 200);
+        }
+
+        &:active {
+            background-color: map(colors, bluegrey, 500);
+
+            > .list__button-title {
+                color: map(colors, bluegrey, 50);
+            }
+        }
+
+        &_active {
+            background-color: map(colors, bluegrey, 500);
+
+            > .list__button-title {
+                color: map(colors, bluegrey, 50);
+            }
+
+            &:hover {
+                background-color: map(colors, bluegrey, 500);
+            }
+        }
+    }
+
+    &__button-title {
+        flex-grow: 1;
+        font-family: map(fonts, primary);
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 16px;
+        color: map(colors, bluegrey, 900);
+    }
+
+    &__error {
+        margin: 0 0 16px 8px;
+        color: map(colors, bluegrey, 900);
+    }
+}
