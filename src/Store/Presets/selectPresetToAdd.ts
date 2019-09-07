@@ -1,9 +1,8 @@
+import { Action as FsaAction, isType } from 'typescript-fsa';
 import defaultState, { IPresetsStore } from './presets.store';
 
 import { Action } from 'redux';
-import { Action as FsaAction } from 'typescript-fsa';
 import actionCreator from './actionCreator';
-import { isType } from 'typescript-fsa';
 import { navigate } from 'hookrouter';
 import { takeLatest } from 'redux-saga/effects';
 

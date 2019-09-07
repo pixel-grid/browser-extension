@@ -2,13 +2,6 @@ import { IPreset, destroyGrid, initializeGrid } from '@sergeyzwezdin/pixelgrid';
 
 import IPresetModel from '@/Models/IPreset';
 
-function write(text: string) {
-    var newElement = document.createElement('p');
-    newElement.textContent = text;
-    newElement.style.color = 'red';
-    document.body.insertBefore(newElement, document.body.firstChild);
-}
-
 declare global {
     interface Window {
         browser: {
@@ -20,25 +13,6 @@ declare global {
                 onMessage: {
                     addListener: Function;
                 };
-            };
-        };
-        safari: {
-            application: {
-                activeBrowserWindow: {
-                    activeTab: {
-                        page: {
-                            dispatchMessage: Function;
-                        };
-                        addEventListener: Function;
-                        removeEventListener: Function;
-                    };
-                };
-            };
-            self: {
-                tab: {
-                    dispatchMessage: Function;
-                };
-                addEventListener: Function;
             };
         };
     }
@@ -80,7 +54,7 @@ function onMessageCallback(
 
                 token = enableGrid(preset, activePresetIndex);
 
-                sendResponse({ enabled: true, activePresetIndex });
+                sendResponse({ activePresetIndex, enabled: true });
                 break;
 
             case 'disable':
@@ -107,22 +81,6 @@ if (window.chrome && window.chrome.runtime && window.chrome.runtime.onMessage) {
 ) {
     // Microsoft Edge
     window.browser.runtime.onMessage.addListener(onMessageCallback);
-} else if (window.safari) {
-    // Safari
-    window.safari.self.addEventListener(
-        'message',
-        function(request: { message: {} }) {
-            const { message } = request;
-            onMessageCallback(
-                message,
-                {} as chrome.runtime.MessageSender,
-                (response?: {}) => {
-                    window.safari.self.tab.dispatchMessage('message', response);
-                }
-            );
-        },
-        false
-    );
 }
 
 function enableGrid(preset?: IPresetModel, activePresetIndex?: number) {

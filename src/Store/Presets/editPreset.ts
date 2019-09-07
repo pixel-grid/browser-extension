@@ -1,8 +1,8 @@
+import { Action as FsaAction, isType } from 'typescript-fsa';
 import defaultState, { IPresetsStore } from './presets.store';
 import { put, select, takeLatest } from 'redux-saga/effects';
 
 import { Action } from 'redux';
-import { Action as FsaAction } from 'typescript-fsa';
 import { IAppState } from '@/store';
 import { IGridBase } from '@sergeyzwezdin/pixelgrid';
 import IPreset from '@/Models/IPreset';
@@ -11,7 +11,6 @@ import actionCreator from './actionCreator';
 import activatePreset from './activatePreset';
 import convertIGridFormToIGridBase from '@/Models/Mappers/convertIGridFormToIGridBase';
 import convertMediaQueryToString from '@/Models/Mappers/convertMediaQueryToString';
-import { isType } from 'typescript-fsa';
 
 const editPresetAction = actionCreator.async<IPresetForm, IPreset, string>(
     'EDIT'
@@ -32,7 +31,7 @@ export const editPresetReducer = (
 
         return {
             ...state,
-            presets: presets
+            presets
         };
     }
 
@@ -56,8 +55,8 @@ function* handleAddPreset(action: FsaAction<IPresetForm>) {
     try {
         if (id !== undefined) {
             const result: IPreset = {
-                id: id,
-                name: name,
+                id,
+                name,
                 grids:
                     grids !== undefined
                         ? (grids
@@ -81,8 +80,8 @@ function* handleAddPreset(action: FsaAction<IPresetForm>) {
 
             yield put(
                 editPresetAction.done({
-                    params: action.payload,
-                    result: result
+                    result,
+                    params: action.payload
                 })
             );
 

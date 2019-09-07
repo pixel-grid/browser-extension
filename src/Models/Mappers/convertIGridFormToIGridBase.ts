@@ -16,7 +16,7 @@ import IGridForm from '../IGridForm';
 function addColorHash(source?: string) {
     if (source !== undefined) {
         if (/^[0-9A-F]{3,6}$/gi.test(source)) {
-            return '#' + source;
+            return `#${source}`;
         } else {
             return source;
         }

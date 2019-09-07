@@ -15,7 +15,8 @@
     "package:edge": "cross-env NODE_ENV=production TARGET=edge npm run build:edge && node ./edge-package.js",
     "start": "cross-env NODE_ENV=development TARGET=chrome webpack-dev-server --mode development --open",
     "start:options": "cross-env NODE_ENV=development TARGET=chrome APP=options webpack-dev-server --mode development --open",
-    "test": "jest"
+    "test": "jest",
+    "lint": "tslint -c ./tslint.json './src/**/*.ts*'"
   },
   "repository": {
     "type": "git",
@@ -70,6 +71,7 @@
     "rimraf": "^3.0.0",
     "ts-jest": "^24.0.2",
     "ts-loader": "^6.0.4",
+    "tslint": "^5.19.0",
     "tslint-config-airbnb": "^5.11.1",
     "typescript": "^3.5.3",
     "webpack": "^4.35.3",

@@ -2,6 +2,7 @@ import './presets.pcss';
 
 import * as React from 'react';
 
+import PresetsActions, { PresetsSelectors } from '@/Store/Presets';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AppContext from '@/appType';
@@ -9,8 +10,6 @@ import Button from '@material-ui/core/Button';
 import Header from '@/Components/Header';
 import { IAppState } from '@/store';
 import List from '@/Components/List';
-import PresetsActions from '@/Store/Presets';
-import { PresetsSelectors } from '@/Store/Presets';
 import { navigate } from 'hookrouter';
 
 const PresetsView: React.FC = () => {

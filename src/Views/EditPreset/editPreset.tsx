@@ -90,7 +90,7 @@ const EditPresetView: React.FC<IEditPresetViewProps> = ({ id, ...others }) => {
                 <EditPresetForm
                     mode="edit"
                     initialValues={{
-                        id: id,
+                        id,
                         name: preset.name,
                         grids: preset.grids,
                         changed: false

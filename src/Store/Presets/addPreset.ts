@@ -1,15 +1,14 @@
+import { Action as FsaAction, isType } from 'typescript-fsa';
 import defaultState, { IPresetsStore } from './presets.store';
 import { put, takeLatest } from 'redux-saga/effects';
 
 import { Action } from 'redux';
-import { Action as FsaAction } from 'typescript-fsa';
 import { IGridBase } from '@sergeyzwezdin/pixelgrid';
 import IPreset from '@/Models/IPreset';
 import IPresetForm from '@/Models/IPresetForm';
 import actionCreator from './actionCreator';
 import convertIGridFormToIGridBase from '@/Models/Mappers/convertIGridFormToIGridBase';
 import convertMediaQueryToString from '@/Models/Mappers/convertMediaQueryToString';
-import { isType } from 'typescript-fsa';
 import uuid from 'uuid/v1';
 
 const addPresetAction = actionCreator.async<IPresetForm, IPreset, string>(
@@ -46,8 +45,8 @@ function* handleAddPreset(action: FsaAction<IPresetForm>) {
 
     try {
         const result: IPreset = {
+            name,
             id: uuid(),
-            name: name,
             grids:
                 grids !== undefined
                     ? (grids
@@ -71,8 +70,8 @@ function* handleAddPreset(action: FsaAction<IPresetForm>) {
 
         yield put(
             addPresetAction.done({
-                params: action.payload,
-                result: result
+                result,
+                params: action.payload
             })
         );
     } catch (e) {

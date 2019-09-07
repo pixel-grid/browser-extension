@@ -7,11 +7,14 @@ import {
     createStore
 } from 'redux';
 import { IPluginStore, pluginReducer, pluginSagas } from '@/Store/Plugin';
-import { IPresetsStore, presetsReducer, presetsSagas } from '@/Store/Presets';
+import PresetsActions, {
+    IPresetsStore,
+    presetsReducer,
+    presetsSagas
+} from '@/Store/Presets';
 import createPersistMiddleware, { resoreAppState } from './store.persistance';
 import initAction, { initReducer } from '@/Store/init';
 
-import PresetsActions from '@/Store/Presets';
 import createSagaMiddleware from 'redux-saga';
 import reduceReducers from 'redux-reduce-reducers';
 

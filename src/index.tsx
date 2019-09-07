@@ -18,23 +18,13 @@ runSagas();
 const routes = {
     '/': () => <MainView />,
     '/index.html': () => <MainView />,
-    '/:safari/index.html': () => <MainView />,
     '/presets': () => <PresetsView />,
-    '/:safari/presets': () => <PresetsView />,
     '/preset': () => <AddPresetView />,
-    '/:safari/preset': () => <AddPresetView />,
     '/preset/:id': ({ id }: HookRouter.QueryParams) => (
         <EditPresetView {...{ id }} />
     ),
-    '/:safari/preset/:id': ({ id }: HookRouter.QueryParams) => (
-        <EditPresetView {...{ id }} />
-    ),
     '/grid': () => <AddGridView />,
-    '/:safari/grid': () => <AddGridView />,
     '/grid/:index': ({ index }: HookRouter.QueryParams) => (
-        <EditGridView {...{ index: Number(index) }} />
-    ),
-    '/:safari/grid/:index': ({ index }: HookRouter.QueryParams) => (
         <EditGridView {...{ index: Number(index) }} />
     )
 };

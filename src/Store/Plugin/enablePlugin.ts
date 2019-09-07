@@ -1,11 +1,10 @@
 import { Action as FsaAction, isType } from 'typescript-fsa';
+import PresetsActions, { PresetsSelectors } from '@/Store/Presets';
 import defaultState, { IPluginStore } from './plugin.store';
 import { delay, put, race, select, take, takeLatest } from 'redux-saga/effects';
 
 import { Action } from 'redux';
 import IPreset from '@/Models/IPreset';
-import PresetsActions from '@/Store/Presets';
-import { PresetsSelectors } from '@/Store/Presets';
 import actionCreator from './actionCreator';
 import { sendCommandAsync } from '@/Helpers/browser';
 
