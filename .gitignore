@@ -60,5 +60,12 @@ typings/
 # next.js build output
 .next
 
+# Mac
 .DS_Store
+
+# Project specific
 build/
+package/
+build-appx/
+PixelGrid/
+.edgepackagerc

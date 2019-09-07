@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const SriPlugin = require('webpack-subresource-integrity');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 const isChromeBuild = process.env.TARGET === 'chrome';
@@ -132,6 +133,8 @@ module.exports = {
     },
 
     plugins: [
+        new CleanWebpackPlugin(),
+
         /**
          * Env variables
          */
