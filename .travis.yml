@@ -7,7 +7,6 @@ script:
   - yarn lint
   - yarn test
   - yarn build
-deploy:
   - yarn package:chrome
   - yarn package:firefox
   - yarn package:opera
