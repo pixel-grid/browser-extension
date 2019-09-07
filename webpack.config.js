@@ -11,9 +11,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 const isChromeBuild = process.env.TARGET === 'chrome';
 const isFirefoxBuild = process.env.TARGET === 'firefox';
 const isOperaBuild = process.env.TARGET === 'opera';
-const isYandexBuild = process.env.TARGET === 'yandex';
 const isEdgeBuild = process.env.TARGET === 'edge';
-const isSafariBuild = process.env.TARGET === 'safari';
 
 const isOptionsRun = process.env.APP === 'options';
 
@@ -25,11 +23,9 @@ module.exports = {
     },
 
     output: {
-        path: !isSafariBuild
-            ? path.resolve(__dirname, 'build')
-            : path.resolve(__dirname, 'build/pixelgrid.safariextension'),
+        path: path.resolve(__dirname, 'build'),
         filename: '[name].js',
-        publicPath: !isSafariBuild ? '/' : undefined
+        publicPath: '/'
     },
 
     devtool: isDevelopment ? 'source-map' : undefined,
@@ -187,32 +183,19 @@ module.exports = {
          */
         new CopyPlugin([{ from: 'assets/', to: 'assets' }]),
 
-        !isSafariBuild
-            ? new CopyPlugin([
-                  {
-                      from: isChromeBuild
-                          ? 'manifest.chrome.json'
-                          : isFirefoxBuild
-                          ? 'manifest.firefox.json'
-                          : isOperaBuild
-                          ? 'manifest.opera.json'
-                          : isYandexBuild
-                          ? 'manifest.yandex.json'
-                          : isEdgeBuild
-                          ? 'manifest.edge.json'
-                          : 'manifest.json',
-                      to: './manifest.json'
-                  }
-              ])
-            : function() {},
-
-        isSafariBuild
-            ? new CopyPlugin([
-                  {
-                      from: './Info.plist',
-                      to: 'Info.plist'
-                  }
-              ])
-            : function() {}
+        new CopyPlugin([
+            {
+                from: isChromeBuild
+                    ? 'manifest.chrome.json'
+                    : isFirefoxBuild
+                    ? 'manifest.firefox.json'
+                    : isOperaBuild
+                    ? 'manifest.opera.json'
+                    : isEdgeBuild
+                    ? 'manifest.edge.json'
+                    : 'manifest.json',
+                to: './manifest.json'
+            }
+        ])
     ]
 };

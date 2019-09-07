@@ -1,13 +1,13 @@
 import * as React from 'react';
 
 import PresetsActions, { editGridFormValidator } from '@/Store/Presets';
-import { isOpera, isSafari, isYandex } from '@/Helpers/environment';
 import { useDispatch, useSelector } from 'react-redux';
 
 import EditGridForm from './editGridForm';
 import Header from '@/Components/Header';
 import { IAppState } from '@/store';
 import IGridForm from '@/Models/IGridForm';
+import { isOpera } from '@/Helpers/environment';
 
 interface IEditGridViewProps {
     index?: number;
@@ -39,8 +39,6 @@ const EditGridView: React.FC<IEditGridViewProps> = ({ index }) => {
         if (index !== undefined) {
             if (
                 isOpera() ||
-                isYandex() ||
-                isSafari() ||
                 confirm('Are you sure that you want to delete the grid?')
             ) {
                 dispatch(PresetsActions.deleteGrid(index));
@@ -52,8 +50,6 @@ const EditGridView: React.FC<IEditGridViewProps> = ({ index }) => {
     const navigateBack = React.useCallback(() => {
         if (
             isOpera() ||
-            isYandex() ||
-            isSafari() ||
             (!formChanged ||
                 confirm(
                     'You have unsaved changes. Are you sure that you want to continue?'

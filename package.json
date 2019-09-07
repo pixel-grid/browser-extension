@@ -7,9 +7,11 @@
     "build:chrome": "cross-env-shell NODE_ENV=production TARGET=chrome webpack --mode production",
     "build:firefox": "cross-env-shell NODE_ENV=production TARGET=firefox webpack --mode production",
     "build:opera": "cross-env-shell NODE_ENV=production TARGET=opera webpack --mode production",
-    "build:yandex": "cross-env-shell NODE_ENV=production TARGET=yandex webpack --mode production",
     "build:edge": "cross-env-shell NODE_ENV=production TARGET=edge webpack --mode production",
-    "build:safari": "cross-env-shell NODE_ENV=production TARGET=safari webpack --mode development",
+    "package:all": "cross-env NODE_ENV=production npm run build:chrome && node ./chrome-package.js && npm run build:firefox && node ./firefox-package.js &&  npm run build:opera && node ./opera-package.js && npm run build:edge && node ./edge-package.js",
+    "package:chrome": "cross-env NODE_ENV=production TARGET=chrome npm run build:chrome && node ./chrome-package.js",
+    "package:firefox": "cross-env NODE_ENV=production TARGET=firefox npm run build:firefox && node ./firefox-package.js",
+    "package:opera": "cross-env NODE_ENV=production TARGET=opera npm run build:opera && node ./opera-package.js",
     "package:edge": "cross-env NODE_ENV=production TARGET=edge npm run build:edge && node ./edge-package.js",
     "start": "cross-env NODE_ENV=development TARGET=chrome webpack-dev-server --mode development --open",
     "start:options": "cross-env NODE_ENV=development TARGET=chrome APP=options webpack-dev-server --mode development --open",
@@ -73,7 +75,8 @@
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2",
-    "webpack-subresource-integrity": "^1.3.2"
+    "webpack-subresource-integrity": "^1.3.2",
+    "zip-a-folder": "^0.0.9"
   },
   "dependencies": {
     "@material-ui/core": "^4.2.0",

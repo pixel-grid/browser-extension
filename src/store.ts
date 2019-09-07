@@ -10,7 +10,6 @@ import { IPluginStore, pluginReducer, pluginSagas } from '@/Store/Plugin';
 import { IPresetsStore, presetsReducer, presetsSagas } from '@/Store/Presets';
 import createPersistMiddleware, { resoreAppState } from './store.persistance';
 import initAction, { initReducer } from '@/Store/init';
-import { isOpera, isYandex } from '@/Helpers/environment';
 
 import PresetsActions from '@/Store/Presets';
 import createSagaMiddleware from 'redux-saga';

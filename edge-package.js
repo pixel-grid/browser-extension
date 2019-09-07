@@ -90,6 +90,11 @@ async function start() {
 
     rimraf.sync(path.resolve('PixelGrid'));
     rimraf.sync(path.resolve('build-appx'));
+
+    // Result
+    console.log(
+        `Final package: ${path.resolve('package/edge/pixelgrid.appx')}`
+    );
 }
 
 function run(command, callback) {

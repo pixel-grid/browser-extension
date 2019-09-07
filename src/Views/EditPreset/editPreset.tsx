@@ -6,13 +6,13 @@ import PresetsActions, {
     PresetsSelectors,
     editPresetFormValidator
 } from '@/Store/Presets';
-import { isOpera, isSafari, isYandex } from '@/Helpers/environment';
 import { useDispatch, useSelector } from 'react-redux';
 
 import EditPresetForm from './editPresetForm';
 import Header from '@/Components/Header';
 import { IAppState } from '@/store';
 import IPresetForm from '@/Models/IPresetForm';
+import { isOpera } from '@/Helpers/environment';
 import { navigate } from 'hookrouter';
 
 interface IEditPresetViewProps {
@@ -49,8 +49,6 @@ const EditPresetView: React.FC<IEditPresetViewProps> = ({ id, ...others }) => {
         if (id !== undefined) {
             if (
                 isOpera() ||
-                isYandex() ||
-                isSafari() ||
                 confirm('Are you sure that you want to delete the preset?')
             ) {
                 dispatch(PresetsActions.deletePreset(id));
@@ -62,8 +60,6 @@ const EditPresetView: React.FC<IEditPresetViewProps> = ({ id, ...others }) => {
     const navigateBack = React.useCallback(() => {
         if (
             isOpera() ||
-            isYandex() ||
-            isSafari() ||
             (!dataChanged ||
                 confirm(
                     'You have unsaved changes. Are you sure that you want to continue?'

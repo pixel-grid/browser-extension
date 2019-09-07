@@ -6,13 +6,13 @@ import PresetsActions, {
     PresetsSelectors,
     addPresetFormValidator
 } from '@/Store/Presets';
-import { isOpera, isSafari, isYandex } from '@/Helpers/environment';
 import { useDispatch, useSelector } from 'react-redux';
 
 import EditPresetForm from './editPresetForm';
 import Header from '@/Components/Header';
 import { IAppState } from '@/store';
 import IPresetForm from '@/Models/IPresetForm';
+import { isOpera } from '@/Helpers/environment';
 import { navigate } from 'hookrouter';
 
 const AddPresetView: React.FC = () => {
@@ -46,8 +46,6 @@ const AddPresetView: React.FC = () => {
     const navigateBack = React.useCallback(() => {
         if (
             isOpera() ||
-            isYandex() ||
-            isSafari() ||
             (!dataChanged ||
                 confirm(
                     'You have unsaved changes. Are you sure that you want to continue?'

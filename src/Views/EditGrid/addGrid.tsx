@@ -1,7 +1,6 @@
 import * as React from 'react';
 
 import PresetsActions, { addGridFormValidator } from '@/Store/Presets';
-import { isOpera, isSafari, isYandex } from '@/Helpers/environment';
 import { useDispatch, useSelector } from 'react-redux';
 
 import EditGridForm from './editGridForm';
@@ -9,6 +8,7 @@ import Header from '@/Components/Header';
 import { IAppState } from '@/store';
 import IGridForm from '@/Models/IGridForm';
 import IPresetForm from '@/Models/IPresetForm';
+import { isOpera } from '@/Helpers/environment';
 
 const AddGridView: React.FC = () => {
     const preset = useSelector<IAppState, IPresetForm | undefined>(
@@ -29,8 +29,6 @@ const AddGridView: React.FC = () => {
     const navigateBack = React.useCallback(() => {
         if (
             isOpera() ||
-            isYandex() ||
-            isSafari() ||
             (!formChanged ||
                 confirm(
                     'You have unsaved changes. Are you sure that you want to continue?'
