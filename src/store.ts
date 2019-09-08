@@ -41,10 +41,12 @@ const persistMiddleware = createPersistMiddleware(
         PresetsActions.editPreset.started,
         PresetsActions.editPreset.done,
         PresetsActions.editPreset.failed,
-        PresetsActions.deletePreset
+        PresetsActions.deletePreset,
+        PresetsActions.activatePreset
     ],
     (state) => ({
         presets: {
+            activePresetIndex: state.presets.activePresetIndex,
             presets: state.presets.presets
         }
     })
