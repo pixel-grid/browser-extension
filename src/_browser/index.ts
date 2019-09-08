@@ -1,6 +1,7 @@
 import { IPreset, destroyGrid, initializeGrid } from '@sergeyzwezdin/pixelgrid';
 
 import IPresetModel from '@/Models/IPreset';
+import { isFirefox } from '@/Helpers/environment';
 
 declare global {
     interface Window {
@@ -16,6 +17,7 @@ declare global {
             };
         };
     }
+    const browser: Window['browser'];
 }
 
 let token:
@@ -74,6 +76,14 @@ function onMessageCallback(
 
 if (window.chrome && window.chrome.runtime && window.chrome.runtime.onMessage) {
     window.chrome.runtime.onMessage.addListener(onMessageCallback);
+} else if (
+    isFirefox() &&
+    browser &&
+    browser.runtime &&
+    browser.runtime.onMessage
+) {
+    // Firefox
+    browser.runtime.onMessage.addListener(onMessageCallback);
 } else if (
     window.browser &&
     window.browser.runtime &&
