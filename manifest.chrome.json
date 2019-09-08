@@ -3,7 +3,7 @@
   "name": "PixelGrid",
   "author": "Sergey Zwezdin (sergey@zwezdin.com)",
   "description": "",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "icons": {
     "16": "assets/pixelgrid-16.png",
     "32": "assets/pixelgrid-32.png",
