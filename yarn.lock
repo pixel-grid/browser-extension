@@ -448,10 +448,10 @@
   resolved "https://registry.yarnpkg.com/@redux-saga/types/-/types-1.0.2.tgz#1d94f02800b094753f9271c206a26c2a06ca14ee"
   integrity sha512-8/qcMh15507AnXJ3lBeuhsdFwnWQqnp68EpUuHlYPixJ5vjVmls7/Jq48cnUlrZI8Jd9U1jkhfCl0gaT5KMgVw==
 
-"@sergeyzwezdin/pixelgrid@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@sergeyzwezdin/pixelgrid/-/pixelgrid-0.2.0.tgz#c4f15085d7f25cdebc930c93a58557ff22b582b6"
-  integrity sha512-h1Co3IQzZTZwXfVSp7HD4CQKQ8qonlxItcalfLAY7W33MWk0RbOzaVVm4W0Yvm0L8TPf2V/lQy87+gqwQ6ZkNA==
+"@sergeyzwezdin/pixelgrid@^0.2.3":
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/@sergeyzwezdin/pixelgrid/-/pixelgrid-0.2.3.tgz#6d932d58358a18c96df227db1778058b2d14572a"
+  integrity sha512-Nnp41ra4Fi3aZOx1H9qMuX3qum2vk9RTW66SZNL7ggx1Kvx8ukh25z93O+RZe64/m7idQA2T2UtB4TLuUvs94g==
   dependencies:
     core-js "^3.1.4"
 

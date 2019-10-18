@@ -49,18 +49,18 @@ const defaultState: IPresetsStore = {
                         gutter: 32,
                         width: 92
                     } as IColumnsCenterGrid,
-                    mediaQuery: '(min-width: 95rem)'
+                    mediaQuery: '(min-width: 120rem)' // xlg
                 },
                 {
                     grid: {
-                        type: 'columns-stretch',
+                        type: 'columns-center',
                         color: '#aaaaaa',
                         opacity: 0.3,
                         count: 12,
                         gutter: 32,
-                        margin: 32
-                    } as IColumnsStretchGrid,
-                    mediaQuery: '(min-width: 84rem) and (max-width: 94.99rem)'
+                        width: 84
+                    } as IColumnsCenterGrid,
+                    mediaQuery: '(min-width: 89rem) and (max-width: 119.99rem)' // lg
                 },
                 {
                     grid: {
@@ -71,7 +71,7 @@ const defaultState: IPresetsStore = {
                         gutter: 16,
                         margin: 16
                     } as IColumnsStretchGrid,
-                    mediaQuery: '(min-width: 40rem) and (max-width: 83.99rem)'
+                    mediaQuery: '(min-width: 84rem) and (max-width: 88.99rem)' // md
                 },
                 {
                     grid: {
@@ -82,7 +82,18 @@ const defaultState: IPresetsStore = {
                         gutter: 8,
                         margin: 16
                     } as IColumnsStretchGrid,
-                    mediaQuery: '(min-width: 20rem) and (max-width: 39.99rem)'
+                    mediaQuery: '(min-width: 40rem) and (max-width: 83.99rem)' // sm
+                },
+                {
+                    grid: {
+                        type: 'columns-stretch',
+                        color: '#aaaaaa',
+                        opacity: 0.3,
+                        count: 12,
+                        gutter: 8,
+                        margin: 16
+                    } as IColumnsStretchGrid,
+                    mediaQuery: '(min-width: 30rem) and (max-width: 39.99rem)' // xs
                 },
                 {
                     grid: {
@@ -93,7 +104,7 @@ const defaultState: IPresetsStore = {
                         gutter: 8,
                         margin: 8
                     } as IColumnsStretchGrid,
-                    mediaQuery: '(max-width: 19.99rem)'
+                    mediaQuery: '(max-width: 29.99rem)' //xxs
                 }
             ]
         },

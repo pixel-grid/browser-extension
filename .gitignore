@@ -69,3 +69,4 @@ package/
 build-appx/
 PixelGrid/
 .edgepackagerc
+.favorites.json
