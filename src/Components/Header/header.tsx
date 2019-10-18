@@ -1,6 +1,6 @@
 import './header.pcss';
 
-import * as React from 'react';
+import React, { FunctionComponent, MouseEvent, useCallback } from 'react';
 
 import { resolveAssetUrl } from '@/Helpers/environment';
 
@@ -8,19 +8,19 @@ const logo = require('./assets/header-logo.svg');
 const back = require('./assets/header-back.svg');
 const gihub = require('./assets/header-github.svg');
 
-interface IHeaderProps {
+type HeaderProps = {
     title: string;
     githubLink?: string;
     backButtonClick?: () => void;
-}
+};
 
-const Header: React.FC<IHeaderProps> = ({
+const Header: FunctionComponent<HeaderProps> = ({
     title,
     githubLink,
     backButtonClick
 }) => {
-    const backButtonClickHander = React.useCallback(
-        (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const backButtonClickHander = useCallback(
+        (e: MouseEvent<HTMLAnchorElement>) => {
             e.preventDefault();
 
             if (backButtonClick) {

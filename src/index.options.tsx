@@ -1,16 +1,15 @@
 import './index.pcss';
 
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-
 import { AddGridView, EditGridView } from '@/Views/EditGrid';
 import { AddPresetView, EditPresetView } from '@/Views/EditPreset';
 import { HookRouter, useRoutes } from 'hookrouter';
+import React, { FunctionComponent } from 'react';
 import store, { runSagas } from '@/store';
 
 import AppContext from './appType';
 import PresetsView from '@/Views/Presets';
 import { Provider } from 'react-redux';
+import { render } from 'react-dom';
 
 runSagas();
 
@@ -29,13 +28,13 @@ const routes = {
     )
 };
 
-const App: React.FC = () => {
+const App: FunctionComponent = () => {
     const routeResult = useRoutes(routes);
 
     return <>{routeResult}</>;
 };
 
-ReactDOM.render(
+render(
     <AppContext.Provider value={{ type: 'options' }}>
         <Provider store={store}>
             <App />

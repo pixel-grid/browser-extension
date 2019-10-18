@@ -1,16 +1,16 @@
-import * as React from 'react';
+import React, { ChangeEvent, FunctionComponent } from 'react';
 
+import FieldBaseProps from './FieldBaseProps';
 import { FieldRenderProps } from 'react-final-form';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
-import IFieldBaseProps from './IFieldBaseProps';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import NativeSelect from '@material-ui/core/NativeSelect';
 
-export const SelectFieldInput: React.FC<
+export const SelectFieldInput: FunctionComponent<
     FieldRenderProps<string, HTMLDivElement> &
-        IFieldBaseProps & { items?: { value: string; text: string }[] }
+        FieldBaseProps & { items?: { value: string; text: string }[] }
 > = ({
     title,
     fullWidth,
@@ -31,7 +31,7 @@ export const SelectFieldInput: React.FC<
                 disabled={disabled}
                 error={meta.touched && meta.error !== undefined}
                 onChange={(
-                    event: React.ChangeEvent<{
+                    event: ChangeEvent<{
                         name?: string;
                         value: string;
                     }>
@@ -61,7 +61,7 @@ export const SelectFieldInput: React.FC<
                 disabled={disabled}
                 error={meta.touched && meta.error !== undefined}
                 onChange={(
-                    event: React.ChangeEvent<{
+                    event: ChangeEvent<{
                         name?: string;
                         value: string;
                     }>

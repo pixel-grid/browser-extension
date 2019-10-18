@@ -1,18 +1,17 @@
 import './editGridForm.pcss';
 
-import * as React from 'react';
-
 import { Field, Form, FormSpy } from 'react-final-form';
 import {
     NumericFieldInput,
     SelectFieldInput,
     TextFieldInput
 } from '@/Components/Form';
+import React, { FunctionComponent } from 'react';
 
 import Button from '@material-ui/core/Button';
 import IGridForm from '@/Models/IGridForm';
 
-interface IEditGridFormViewProps {
+type EditGridFormViewProps = {
     mode: 'add' | 'edit';
     initialValues?: IGridForm;
     validate?: (values: IGridForm) => {};
@@ -20,9 +19,9 @@ interface IEditGridFormViewProps {
     onFormChange?: (pristine: boolean) => void;
     onCancel?: () => void;
     onSubmit: (values: IGridForm) => void;
-}
+};
 
-const EditGridFormView: React.FC<IEditGridFormViewProps> = ({
+const EditGridFormView: FunctionComponent<EditGridFormViewProps> = ({
     mode,
     initialValues,
     validate,

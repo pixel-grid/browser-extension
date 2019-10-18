@@ -1,7 +1,6 @@
 import './main.pcss';
 
-import * as React from 'react';
-
+import React, { ChangeEvent, FunctionComponent, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
@@ -16,7 +15,7 @@ import { navigate } from 'hookrouter';
 
 declare var browser: any;
 
-const MainView: React.FC = () => {
+const MainView: FunctionComponent = () => {
     const enabled = useSelector<IAppState, boolean>(
         (state) => state.plugin.enabled
     );
@@ -25,7 +24,7 @@ const MainView: React.FC = () => {
     );
 
     const dispatch = useDispatch();
-    const setEnabled = React.useCallback(
+    const setEnabled = useCallback(
         (enable: boolean) =>
             dispatch(PluginActions.enablePlugin.started(enable)),
         [dispatch]
@@ -44,9 +43,9 @@ const MainView: React.FC = () => {
                     <Switch
                         disabled={enabledSwitching}
                         checked={enabled}
-                        onChange={(
-                            event: React.ChangeEvent<HTMLInputElement>
-                        ) => setEnabled(event.target.checked)}
+                        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                            setEnabled(event.target.checked)
+                        }
                     />
                 </div>
             </section>

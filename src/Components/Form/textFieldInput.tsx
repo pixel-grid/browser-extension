@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 
+import FieldBaseProps from './FieldBaseProps';
 import { FieldRenderProps } from 'react-final-form';
-import IFieldBaseProps from './IFieldBaseProps';
 import TextField from '@material-ui/core/TextField';
 
-export const TextFieldInput: React.FC<
-    FieldRenderProps<string, HTMLInputElement> & IFieldBaseProps
+export const TextFieldInput: FunctionComponent<
+    FieldRenderProps<string, HTMLInputElement> & FieldBaseProps
 > = ({ title, fullWidth, disabled, outlined, helperText, input, meta }) =>
     !outlined ? (
         <TextField

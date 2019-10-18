@@ -1,8 +1,7 @@
 import './presets.pcss';
 
-import * as React from 'react';
-
 import PresetsActions, { PresetsSelectors } from '@/Store/Presets';
+import React, { FunctionComponent, useCallback, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import AppContext from '@/appType';
@@ -12,14 +11,14 @@ import { IAppState } from '@/store';
 import List from '@/Components/List';
 import { navigate } from 'hookrouter';
 
-const PresetsView: React.FC = () => {
-    const appContext = React.useContext(AppContext);
+const PresetsView: FunctionComponent = () => {
+    const appContext = useContext(AppContext);
 
     const presets = useSelector<IAppState, { id: string; name: string }[]>(
         (state) => PresetsSelectors.presetsName(state)
     );
     const dispatch = useDispatch();
-    const selectPresetToAdd = React.useCallback(
+    const selectPresetToAdd = useCallback(
         () =>
             dispatch(
                 PresetsActions.selectPresetToAdd({ navigateToView: true })
@@ -27,7 +26,7 @@ const PresetsView: React.FC = () => {
         [dispatch]
     );
 
-    const navigateBack = React.useCallback(() => {
+    const navigateBack = useCallback(() => {
         navigate('/', true);
     }, []);
 

@@ -1,6 +1,5 @@
-import * as React from 'react';
-
 import PresetsActions, { editGridFormValidator } from '@/Store/Presets';
+import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import EditGridForm from './editGridForm';
@@ -9,11 +8,11 @@ import { IAppState } from '@/store';
 import IGridForm from '@/Models/IGridForm';
 import { isOpera } from '@/Helpers/environment';
 
-interface IEditGridViewProps {
+type EditGridViewProps = {
     index?: number;
-}
+};
 
-const EditGridView: React.FC<IEditGridViewProps> = ({ index }) => {
+const EditGridView: FunctionComponent<EditGridViewProps> = ({ index }) => {
     const grid = useSelector<IAppState, IGridForm | undefined>((state) =>
         state.presets.selectedPreset !== undefined && index !== undefined
             ? state.presets.selectedPreset.grids.length > index
@@ -22,10 +21,10 @@ const EditGridView: React.FC<IEditGridViewProps> = ({ index }) => {
             : undefined
     );
 
-    const [formChanged, setFormChanged] = React.useState<boolean>(false);
+    const [formChanged, setFormChanged] = useState<boolean>(false);
 
     const dispatch = useDispatch();
-    const editGrid = React.useCallback(
+    const editGrid = useCallback(
         (form: IGridForm) => {
             if (index !== undefined) {
                 dispatch(PresetsActions.editGrid({ form, index }));
@@ -35,7 +34,7 @@ const EditGridView: React.FC<IEditGridViewProps> = ({ index }) => {
         [dispatch, index]
     );
 
-    const deleteGrid = React.useCallback(() => {
+    const deleteGrid = useCallback(() => {
         if (index !== undefined) {
             if (
                 isOpera() ||
@@ -47,7 +46,7 @@ const EditGridView: React.FC<IEditGridViewProps> = ({ index }) => {
         }
     }, [dispatch, index]);
 
-    const navigateBack = React.useCallback(() => {
+    const navigateBack = useCallback(() => {
         if (
             isOpera() ||
             (!formChanged ||

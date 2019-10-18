@@ -1,11 +1,10 @@
 import './editPresetForm.pcss';
 
-import * as React from 'react';
-
 import PresetsActions, {
     PresetsSelectors,
     addPresetFormValidator
 } from '@/Store/Presets';
+import React, { FunctionComponent, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import EditPresetForm from './editPresetForm';
@@ -15,7 +14,7 @@ import IPresetForm from '@/Models/IPresetForm';
 import { isOpera } from '@/Helpers/environment';
 import { navigate } from 'hookrouter';
 
-const AddPresetView: React.FC = () => {
+const AddPresetView: FunctionComponent = () => {
     const preset = useSelector<IAppState, IPresetForm | undefined>(
         (state) => state.presets.selectedPreset
     );
@@ -29,13 +28,13 @@ const AddPresetView: React.FC = () => {
         PresetsSelectors.selectedPresetNameChanged
     );
 
-    const [formChanged, setFormChanged] = React.useState<boolean>(false);
+    const [formChanged, setFormChanged] = useState<boolean>(false);
 
     const dataChanged = formChanged || nameChanged || gridsChanged;
 
     const dispatch = useDispatch();
 
-    const addPreset = React.useCallback(
+    const addPreset = useCallback(
         (form: IPresetForm) => {
             dispatch(PresetsActions.addPreset.started(form));
             navigate('/presets', true);
@@ -43,7 +42,7 @@ const AddPresetView: React.FC = () => {
         [dispatch]
     );
 
-    const navigateBack = React.useCallback(() => {
+    const navigateBack = useCallback(() => {
         if (
             isOpera() ||
             (!dataChanged ||

@@ -1,12 +1,11 @@
-import * as React from 'react';
-
 import PresetsActions, { PresetsSelectors } from '@/Store/Presets';
+import React, { FunctionComponent, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { IAppState } from '@/store';
 import List from '@/Components/List';
 
-const PresetSelectContainer: React.FC = () => {
+const PresetSelectContainer: FunctionComponent = () => {
     const presets = useSelector<IAppState, { id: string; name: string }[]>(
         PresetsSelectors.presetsName
     );
@@ -16,7 +15,7 @@ const PresetSelectContainer: React.FC = () => {
     );
 
     const dispatch = useDispatch();
-    const selectPreset = React.useCallback(
+    const selectPreset = useCallback(
         (id: string, index?: number) =>
             dispatch(PresetsActions.activatePreset(index)),
         [dispatch]

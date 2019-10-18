@@ -1,9 +1,8 @@
 import './editPresetForm.pcss';
 
-import * as React from 'react';
-
 import { Field, Form, FormSpy } from 'react-final-form';
 import PresetsActions, { PresetsSelectors } from '@/Store/Presets';
+import React, { FunctionComponent, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
@@ -15,7 +14,7 @@ import { debounce } from 'lodash';
 import generateGridName from '@/Models/Helpers/generateGridName';
 import { navigate } from 'hookrouter';
 
-interface IEditPresetFormViewProps {
+type EditPresetFormViewProps = {
     mode: 'add' | 'edit';
     initialValues?: IPresetForm;
     gridsChanged: boolean;
@@ -24,9 +23,9 @@ interface IEditPresetFormViewProps {
     onFormChange?: (pristine: boolean) => void;
     onCancel?: () => void;
     onSubmit: (values: IPresetForm) => void;
-}
+};
 
-const EditPresetFormView: React.FC<IEditPresetFormViewProps> = ({
+const EditPresetFormView: FunctionComponent<EditPresetFormViewProps> = ({
     mode,
     initialValues,
     gridsChanged,
@@ -41,7 +40,7 @@ const EditPresetFormView: React.FC<IEditPresetFormViewProps> = ({
     );
 
     const dispatch = useDispatch();
-    const updateSelectedPresetData = React.useCallback(
+    const updateSelectedPresetData = useCallback(
         debounce((name: string) => {
             dispatch(PresetsActions.updateSelectedPreset({ name }));
         }, 500),

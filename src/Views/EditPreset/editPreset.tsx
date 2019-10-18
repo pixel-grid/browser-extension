@@ -1,11 +1,15 @@
 import './editPresetForm.pcss';
 
-import * as React from 'react';
-
 import PresetsActions, {
     PresetsSelectors,
     editPresetFormValidator
 } from '@/Store/Presets';
+import React, {
+    FunctionComponent,
+    useCallback,
+    useEffect,
+    useState
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import EditPresetForm from './editPresetForm';
@@ -15,11 +19,14 @@ import IPresetForm from '@/Models/IPresetForm';
 import { isOpera } from '@/Helpers/environment';
 import { navigate } from 'hookrouter';
 
-interface IEditPresetViewProps {
+type EditPresetViewProps = {
     id?: string;
-}
+};
 
-const EditPresetView: React.FC<IEditPresetViewProps> = ({ id, ...others }) => {
+const EditPresetView: FunctionComponent<EditPresetViewProps> = ({
+    id,
+    ...others
+}) => {
     const preset = useSelector<IAppState, IPresetForm | undefined>(
         (state) => state.presets.selectedPreset
     );
@@ -33,19 +40,19 @@ const EditPresetView: React.FC<IEditPresetViewProps> = ({ id, ...others }) => {
         PresetsSelectors.selectedPresetNameChanged
     );
 
-    const [formChanged, setFormChanged] = React.useState<boolean>(false);
+    const [formChanged, setFormChanged] = useState<boolean>(false);
 
     const dataChanged = formChanged || nameChanged || gridsChanged;
 
     const dispatch = useDispatch();
-    const selectPresetToEdit = React.useCallback(
+    const selectPresetToEdit = useCallback(
         (id: string) => {
             dispatch(PresetsActions.selectPresetToEdit(id));
         },
         [dispatch]
     );
 
-    const deletePreset = React.useCallback(() => {
+    const deletePreset = useCallback(() => {
         if (id !== undefined) {
             if (
                 isOpera() ||
@@ -57,7 +64,7 @@ const EditPresetView: React.FC<IEditPresetViewProps> = ({ id, ...others }) => {
         }
     }, [dispatch, id]);
 
-    const navigateBack = React.useCallback(() => {
+    const navigateBack = useCallback(() => {
         if (
             isOpera() ||
             (!dataChanged ||
@@ -69,13 +76,13 @@ const EditPresetView: React.FC<IEditPresetViewProps> = ({ id, ...others }) => {
         }
     }, [dataChanged]);
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (id !== undefined && (preset === undefined || preset.id !== id)) {
             selectPresetToEdit(id);
         }
     }, [id]);
 
-    const editPreset = React.useCallback(
+    const editPreset = useCallback(
         (form: IPresetForm) => {
             dispatch(PresetsActions.editPreset.started(form));
             navigate('/presets', true);

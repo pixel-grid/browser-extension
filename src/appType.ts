@@ -1,6 +1,6 @@
-import * as React from 'react';
+import { createContext } from 'react';
 
-const AppContext = React.createContext<{ type: 'app' | 'options' }>({
+const AppContext = createContext<{ type: 'app' | 'options' }>({
     type: 'app'
 });
 

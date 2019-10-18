@@ -1,6 +1,6 @@
 import './list.pcss';
 
-import * as React from 'react';
+import React, { FunctionComponent } from 'react';
 
 import classnames from 'classnames';
 import { resolveAssetUrl } from '@/Helpers/environment';
@@ -9,14 +9,14 @@ const grid = require('./assets/grid.svg');
 const rows = require('./assets/rows.svg');
 const columns = require('./assets/columns.svg');
 
-interface IListProps {
+type ListProps = {
     items: { id: string; name: string; type?: 'grid' | 'rows' | 'columns' }[];
     selectedIndex?: number;
     noItemsText?: string;
     onSelect?: (id: string, index?: number) => void;
-}
+};
 
-const List: React.FC<IListProps> = ({
+const List: FunctionComponent<ListProps> = ({
     items,
     selectedIndex,
     noItemsText = 'No items yet',

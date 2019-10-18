@@ -1,14 +1,13 @@
-import * as React from 'react';
-
 import NumberFormat, { NumberFormatValues } from 'react-number-format';
+import React, { FunctionComponent, useCallback } from 'react';
 
+import FieldBaseProps from './FieldBaseProps';
 import { FieldRenderProps } from 'react-final-form';
-import IFieldBaseProps from './IFieldBaseProps';
 import TextField from '@material-ui/core/TextField';
 
-export const NumericFieldInput: React.FC<
+export const NumericFieldInput: FunctionComponent<
     FieldRenderProps<string, HTMLInputElement> &
-        IFieldBaseProps & { suffix?: string }
+        FieldBaseProps & { suffix?: string }
 > = ({
     title,
     fullWidth,
@@ -19,7 +18,7 @@ export const NumericFieldInput: React.FC<
     input,
     meta
 }) => {
-    const innerInput = React.useCallback(
+    const innerInput = useCallback(
         ({ inputRef, onChange, defaultValue, ...other }) => (
             <NumberFormat
                 {...input}
