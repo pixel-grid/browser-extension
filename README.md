@@ -1,3 +1,3 @@
 # browser-extension
 
-[![Build Status](https://travis-ci.org/pixel-grid/browser-extension.svg?branch=master)](https://travis-ci.org/pixel-grid/browser-extension)
+[![Build Status](https://github.com/pixel-grid/pixelgrid-browser/workflows/Build/badge.svg?branch=master)](https://github.com/pixel-grid/pixelgrid/actions?workflow=Build)
