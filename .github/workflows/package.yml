@@ -49,16 +49,19 @@ jobs:
       if: steps.check.outputs.changed == 'true'
       run: npm run package:opera
     - name: Upload - Chrome package
+      if: steps.check.outputs.changed == 'true'
       uses: actions/upload-artifact@v1
       with:
         name: chrome
         path: package/chrome
     - name: Upload - Firefox package
+      if: steps.check.outputs.changed == 'true'
       uses: actions/upload-artifact@v1
       with:
         name: firefox
         path: package/firefox
     - name: Upload - Opera package
+      if: steps.check.outputs.changed == 'true'
       uses: actions/upload-artifact@v1
       with:
         name: opera
