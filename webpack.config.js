@@ -14,6 +14,7 @@ const isOperaBuild = process.env.TARGET === 'opera';
 const isEdgeBuild = process.env.TARGET === 'edge';
 
 const isOptionsRun = process.env.APP === 'options';
+const isDebug = process.argv.indexOf('--debug') !== -1;
 
 module.exports = {
     entry: {
@@ -135,6 +136,7 @@ module.exports = {
          * Env variables
          */
         new webpack.DefinePlugin({
+            'process.env.DEBUG': isDebug,
             'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
             'process.env.TARGET': JSON.stringify(process.env.TARGET),
             'process.env.APP': JSON.stringify(process.env.APP)
@@ -169,13 +171,25 @@ module.exports = {
             template: './public/index.html',
             filename: 'index.html',
             chunks: ['vendors', 'bundle'],
-            hash: true
+            hash: true,
+            minify: !isDebug
+                ? {
+                      collapseWhitespace: true,
+                      removeComments: true
+                  }
+                : false
         }),
         new HtmlWebpackPlugin({
             template: './public/index.html',
             filename: 'options.html',
             chunks: ['vendors', 'options'],
-            hash: true
+            hash: true,
+            minify: !isDebug
+                ? {
+                      collapseWhitespace: true,
+                      removeComments: true
+                  }
+                : false
         }),
 
         /**
