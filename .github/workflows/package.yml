@@ -50,17 +50,17 @@ jobs:
       if: steps.check.outputs.changed == 'true'
       run: npm run package:opera
     - name: Upload - Chrome package
-      uses: actions/upload-artifactv1.0.0
+      uses: actions/upload-artifactv1
       with:
         name: chrome
         path: package/chrome
     - name: Upload - Firefox package
-      uses: actions/upload-artifactv1.0.0
+      uses: actions/upload-artifactv1
       with:
         name: firefox
         path: package/firefox
     - name: Upload - Opera package
-      uses: actions/upload-artifactv1.0.0
+      uses: actions/upload-artifactv1
       with:
         name: opera
         path: package/opera
