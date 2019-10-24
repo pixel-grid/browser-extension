@@ -16,7 +16,9 @@
     "start": "cross-env NODE_ENV=development TARGET=chrome webpack-dev-server --mode development --open",
     "start:options": "cross-env NODE_ENV=development TARGET=chrome APP=options webpack-dev-server --mode development --open",
     "test": "jest",
-    "lint": "tslint -c ./tslint.json './src/**/*.ts*'"
+    "lint": "tslint -c ./tslint.json './src/**/*.ts*'",
+    "format-check": "prettier --check \"src/**/*.ts*\"",
+    "format": "prettier --write \"src/**/*.ts*\""
   },
   "repository": {
     "type": "git",
@@ -68,6 +70,7 @@
     "postcss-nested": "^4.1.2",
     "postcss-nested-ancestors": "^2.0.0",
     "postcss-pxtorem": "^4.0.1",
+    "prettier": "^1.18.2",
     "rimraf": "^3.0.0",
     "ts-jest": "^24.0.2",
     "ts-loader": "^6.0.4",
