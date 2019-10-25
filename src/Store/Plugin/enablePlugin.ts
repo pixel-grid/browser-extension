@@ -5,13 +5,14 @@ import { delay, put, race, select, take, takeLatest } from 'redux-saga/effects';
 
 import { Action } from 'redux';
 import IPreset from '@/Models/IPreset';
+import PluginEnableErrorReason from './Models/pluginEnableErrorReason';
 import actionCreator from './actionCreator';
 import { sendCommandAsync } from '@/Helpers/browser';
 
 const enablePluginAction = actionCreator.async<
-    boolean,
+    { enable: boolean },
     { enabled: boolean; activePresetIndex?: number },
-    string
+    PluginEnableErrorReason
 >('ENABLE');
 
 export const enablePluginReducer = (
@@ -27,25 +28,31 @@ export const enablePluginReducer = (
         return {
             ...state,
             switching: false,
-            enabled: action.payload.result.enabled
+            enabled: action.payload.result.enabled,
+            errorReason: undefined
         };
     } else if (isType(action, enablePluginAction.failed)) {
         return {
             ...state,
             switching: false,
-            errorMessage: action.payload.error
+            errorReason: action.payload.error
         };
     }
 
     return state;
 };
 
-function* handleEnablePlugin(action: FsaAction<boolean>) {
+function* handleEnablePlugin(
+    action: ReturnType<typeof enablePluginAction.started>
+) {
     const activePreset: IPreset | undefined = yield select(
         PresetsSelectors.activePreset
     );
 
-    const sendChannel = yield sendCommandAsync(action.payload, activePreset);
+    const sendChannel = yield sendCommandAsync(
+        action.payload.enable,
+        activePreset
+    );
     const result: {
         enabled: boolean;
         activePresetIndex?: number;
@@ -63,18 +70,42 @@ export function* enablePluginSaga() {
     const {
         result
     }: {
-        result: { enabled: boolean; activePresetIndex?: number };
+        result: {
+            notSupportedPage: boolean;
+            enabled: boolean;
+            activePresetIndex?: number;
+        };
     } = yield race({
         result: take(sendChannel),
         timeout: delay(1000)
     });
 
     if (result !== undefined) {
-        yield put(enablePluginAction.done({ result, params: true }));
+        if (result.notSupportedPage === false) {
+            yield put(
+                enablePluginAction.done({ result, params: { enable: true } })
+            );
 
-        if (result.activePresetIndex !== undefined) {
-            yield put(PresetsActions.activatePreset(result.activePresetIndex));
+            if (result.activePresetIndex !== undefined) {
+                yield put(
+                    PresetsActions.activatePreset(result.activePresetIndex)
+                );
+            }
+        } else {
+            yield put(
+                enablePluginAction.failed({
+                    error: 'NOT_SUPPORTED',
+                    params: { enable: true }
+                })
+            );
         }
+    } else {
+        yield put(
+            enablePluginAction.failed({
+                error: 'NOT_SUPPORTED',
+                params: { enable: true }
+            })
+        );
     }
 }
 

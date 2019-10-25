@@ -1,13 +1,15 @@
+import PluginEnableErrorReason from './Models/pluginEnableErrorReason';
+
 export interface IPluginStore {
     enabled: boolean;
     switching: boolean;
-    errorMessage?: string;
+    errorReason?: PluginEnableErrorReason;
 }
 
 const defaultState: IPluginStore = {
     enabled: false,
     switching: false,
-    errorMessage: undefined
+    errorReason: undefined
 };
 
 export default defaultState;

@@ -41,6 +41,40 @@
         }
     }
 
+    &__error {
+        margin: 0;
+        padding: 24px;
+        flex-grow: 1;
+        background-color: map(colors, bluegrey, 50);
+        overflow-y: auto;
+        user-select: none;
+    }
+
+    &__error-icon {
+        margin: 0 0 24px;
+    }
+
+    &__error-text {
+        padding: 0 0 8px;
+        font-size: 16px;
+        line-height: 16px;
+        color: map(colors, bluegrey, 900);
+    }
+
+    &__error-link {
+        &:link, &:visited {
+            font-size: 16px;
+            line-height: 16px;
+            color: map(colors, lightblue, 700);
+        }
+        &:hover {
+            color: map(colors, lightblue, 800);
+        }
+        &:active {
+            color: map(colors, lightblue, 600);
+        }
+    }
+
     &__bottom {
         margin: 0;
         padding: 24px 24px 24px 16px;

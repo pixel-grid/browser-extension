@@ -60,6 +60,7 @@ export function sendCommandAsync(
             },
             (response) => {
                 emitter({
+                    notSupportedPage: !response,
                     enabled: response && response.enabled,
                     activePresetIndex: response
                         ? response.activePresetIndex
