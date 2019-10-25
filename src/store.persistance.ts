@@ -1,5 +1,5 @@
 import { Action, Middleware, MiddlewareAPI } from 'redux';
-import { getItem, setItem } from '@/Helpers/storage';
+import { getItem, setItem } from '@/Helpers/syncStorage';
 
 import { IAppState } from '@/store';
 import { debounce } from 'lodash';

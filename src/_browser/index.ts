@@ -1,4 +1,5 @@
 import { IPreset, destroyGrid, initializeGrid } from '@sergeyzwezdin/pixelgrid';
+import { getItem, setItem } from '@/Helpers/localStorage';
 
 import IPresetModel from '@/Models/IPreset';
 import { isFirefox } from '@/Helpers/environment';
@@ -28,6 +29,13 @@ let token:
       }
     | undefined = undefined;
 
+let currentTab:
+    | {
+          id: number;
+          url: string;
+      }
+    | undefined;
+
 function onMessageCallback(
     request: any,
     sender: chrome.runtime.MessageSender,
@@ -55,6 +63,14 @@ function onMessageCallback(
                 }
 
                 token = enableGrid(preset, activePresetIndex);
+                if (currentTab) {
+                    saveLocalState(
+                        currentTab.id,
+                        currentTab.url,
+                        preset,
+                        activePresetIndex
+                    );
+                }
 
                 sendResponse({ activePresetIndex, enabled: true });
                 break;
@@ -63,6 +79,15 @@ function onMessageCallback(
                 if (token) {
                     destroyGrid(token);
                     token = undefined;
+
+                    if (currentTab) {
+                        saveLocalState(
+                            currentTab.id,
+                            currentTab.url,
+                            undefined,
+                            undefined
+                        );
+                    }
                 }
 
                 sendResponse({
@@ -74,23 +99,23 @@ function onMessageCallback(
     }
 }
 
-if (window.chrome && window.chrome.runtime && window.chrome.runtime.onMessage) {
-    window.chrome.runtime.onMessage.addListener(onMessageCallback);
-} else if (
-    isFirefox() &&
-    browser &&
-    browser.runtime &&
-    browser.runtime.onMessage
-) {
-    // Firefox
-    browser.runtime.onMessage.addListener(onMessageCallback);
-} else if (
-    window.browser &&
-    window.browser.runtime &&
-    window.browser.runtime.onMessage
-) {
-    // Microsoft Edge
-    window.browser.runtime.onMessage.addListener(onMessageCallback);
+function getBrowserRuntime(): Window['browser']['runtime'] | undefined {
+    if (window.chrome && window.chrome.runtime) {
+        return window.chrome.runtime;
+    } else if (isFirefox() && browser && browser.runtime) {
+        // Firefox
+        return browser.runtime;
+    } else if (window.browser && window.browser.runtime) {
+        // Microsoft Edge
+        return window.browser.runtime;
+    }
+
+    return undefined;
+}
+
+const runtime = getBrowserRuntime();
+if (runtime && runtime.onMessage) {
+    runtime.onMessage.addListener(onMessageCallback);
 }
 
 function enableGrid(preset?: IPresetModel, activePresetIndex?: number) {
@@ -108,3 +133,53 @@ function enableGrid(preset?: IPresetModel, activePresetIndex?: number) {
 
     return initializeGrid([]);
 }
+
+function saveLocalState(
+    tabId: number,
+    url: string,
+    preset?: IPresetModel,
+    activePresetIndex?: number
+) {
+    const storageKey = `${tabId}_${url}`;
+    return setItem(storageKey, { preset, activePresetIndex });
+}
+
+function loadLocalState(tabId: number, url: string) {
+    const storageKey = `${tabId}_${url}`;
+    return new Promise<{ preset?: IPresetModel; activePresetIndex?: number }>(
+        (resolve, reject) => {
+            getItem<
+                | {
+                      preset?: IPresetModel;
+                      activePresetIndex?: number;
+                  }
+                | undefined
+            >(storageKey).then((storageItem) => {
+                if (storageItem) {
+                    resolve(storageItem);
+                } else {
+                    reject();
+                }
+            });
+        }
+    );
+}
+
+// load previous state on page reload
+
+const loadInitialState = () =>
+    chrome.runtime.sendMessage(
+        { command: 'resolve-current-tab' },
+        ({ tab: { id, url } }: { tab: { id: number; url: string } }) => {
+            currentTab = {
+                id,
+                url
+            };
+
+            loadLocalState(id, url).then(({ preset, activePresetIndex }) => {
+                token = enableGrid(preset, activePresetIndex);
+            });
+        }
+    );
+
+window.addEventListener('load', loadInitialState);

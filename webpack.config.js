@@ -20,6 +20,7 @@ module.exports = {
     entry: {
         bundle: path.resolve(__dirname, 'src/index.tsx'),
         browser: path.resolve(__dirname, 'src/_browser/index.ts'),
+        background: path.resolve(__dirname, 'src/_browser/background.ts'),
         options: path.resolve(__dirname, 'src/index.options.tsx')
     },
 

@@ -24,11 +24,15 @@
   },
   "content_scripts": [
     {
-        "matches": ["http://*/*", "https://*/*"],
+        "matches": ["*://*/*"],
         "js": ["browser.js"],
         "run_at": "document_start"
     }
   ],
+  "background":{
+    "scripts": ["background.js"],
+    "persistent": false
+  },
   "options_ui": {
     "page": "options.html"
   },
